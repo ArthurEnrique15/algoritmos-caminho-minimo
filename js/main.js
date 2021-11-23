@@ -132,7 +132,6 @@ function dijkstra(graph, origin, destination) {
             alert("Caminho não encontrado");
             return;
         }
-
         path.unshift(pred[path[0]]);
     }
   
@@ -188,6 +187,10 @@ function bellmanFord(graph, origin, destination) {
   
     // preenche o caminho
     while (path[0] != origin) {
+        if (pred[path[0]] === null) {
+            alert("Caminho não encontrado");
+            return;
+        }
         path.unshift(pred[path[0]]);
     }
 
@@ -211,8 +214,6 @@ function floydWarshall(graph, origin, destination) {
         return;
     }
 
-    // console.log(graphArray);
-
     let dist = [];
     let pred = [];
     for (i = 0; i < totalVertex; i++) {
@@ -227,7 +228,6 @@ function floydWarshall(graph, origin, destination) {
                 pred[i][j] = null;
             } else {
                 element = graphArray.find((element) => element.origin == i && element.destination == j);
-                // console.log(i, j, element);
                 if (element) {
                     dist[i][j] = element.value;
                     pred[i][j] = i;
@@ -250,8 +250,6 @@ function floydWarshall(graph, origin, destination) {
         }   
     }
 
-    // console.log(dist, pred);
-
     // cria o vetor do caminho e a variável de custo
     let path = [];
     let cost = dist[origin][destination];
@@ -259,10 +257,12 @@ function floydWarshall(graph, origin, destination) {
   
     // preenche o caminho
     while (path[0] != origin) {
+        if (pred[origin][path[0]] === null) {
+            alert("Caminho não encontrado");
+            return;
+        }
         path.unshift(pred[origin][path[0]]);
     }
-
-    // console.log(path, cost);
 
     // cálculo do tempo de execução em segundos
     const executionTime = (new Date().getTime() - startTime) / 1000;
