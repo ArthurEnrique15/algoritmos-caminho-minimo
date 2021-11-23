@@ -78,8 +78,6 @@ function dijkstra(graph, origin, destination) {
         return;
     }
 
-    console.log("validou origem e destino");
-  
     // cria os vetores de distância e predecessor e os preenche
     let dist = [];
     let pred = [];
