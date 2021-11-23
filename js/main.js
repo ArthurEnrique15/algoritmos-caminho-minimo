@@ -77,6 +77,8 @@ function dijkstra(graph, origin, destination) {
         alert("Origem ou destino inválido!");
         return;
     }
+
+    console.log("validou origem e destino");
   
     // cria os vetores de distância e predecessor e os preenche
     let dist = [];
@@ -125,7 +127,12 @@ function dijkstra(graph, origin, destination) {
     path.unshift(destination);
   
     // preenche o caminho
-    while (path[0] != origin) {
+    while (path[0] !== origin) {
+        if (pred[path[0]] === null) {
+            alert("Caminho não encontrado");
+            return;
+        }
+
         path.unshift(pred[path[0]]);
     }
   
@@ -147,7 +154,7 @@ function bellmanFord(graph, origin, destination) {
         alert("Origem ou destino inválido!");
         return;
     }
-  
+
     // cria os vetores de distância e predecessor e os preenche
     let dist = [];
     let pred = [];
